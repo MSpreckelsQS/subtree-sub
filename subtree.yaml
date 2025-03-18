@@ -15,10 +15,16 @@ jobs:
           git config --global url."https://${{ secrets.TOKEN }}@github.com/MSpreckelsQS/".insteadOf "https://github.com/MSpreckelsQS/"
         shell: bash
 
+      - name: Add deploykey
+        run: |
+          eval `ssh-agent -s`
+          ssh-add - <<< '${{ secrets.DEPLOY_KEY }}'
+        shell: bash
+
       - name: Subtree Pull
         shell: bash
         run: |
-          git subtree pull --prefix .github/workflows https://github.com/MSpreckelsQS/subtree-sub main --squash
+          git subtree pull --prefix .github/workflows https://github.com/MSpreckelsQS/subtree-sub.git main --squash
 
       - name: Create PR
         shell: bash
