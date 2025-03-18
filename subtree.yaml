@@ -15,6 +15,11 @@ jobs:
           git config --global url."https://${{ secrets.TOKEN }}@github.com/MSpreckelsQS/".insteadOf "https://github.com/MSpreckelsQS/"
         shell: bash
 
+      - name: Subtree Add
+        shell: bash
+        run: |
+          git subtree add --prefix .github/workflows https://github.com/MSpreckelsQS/subtree-sub.git main --squash
+
       - name: Subtree Pull
         shell: bash
         run: |
