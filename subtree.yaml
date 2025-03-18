@@ -10,6 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Extend Parent Repo URLs with access tokens
+        run: |
+          git config --global url."https://${{ secrets.TOKEN }}@github.com/MSpreckelsQS/".insteadOf "https://github.com/MSpreckelsQS/"
+        shell: bash
+
       - name: Subtree Pull
         shell: bash
         run: |
