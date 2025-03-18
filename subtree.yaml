@@ -12,7 +12,7 @@ jobs:
 
       - name: Extend Parent Repo URLs with access tokens
         run: |
-          git config --global url."https://${{ secrets.TOKEN }}@github.com/MSpreckelsQS/".insteadOf "https://github.com/MSpreckelsQS/"
+          git config --global url."https://github:${{ secrets.TOKEN }}@github.com/MSpreckelsQS/".insteadOf "https://github.com/MSpreckelsQS/"
         shell: bash
 
       - name: Add deploykey
