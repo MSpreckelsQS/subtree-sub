@@ -10,19 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Extend Parent Repo URLs with access tokens
-        run: |
-          git config --global user.email "mail@example.com"
-          git config --global user.name "workflow"
-          git config --global url."https://github:${{ secrets.TOKEN }}@github.com/MSpreckelsQS/".insteadOf "https://github.com/MSpreckelsQS/"
-        shell: bash
-
-      - name: Add deploykey
-        run: |
-          eval `ssh-agent -s`
-          ssh-add - <<< '${{ secrets.DEPLOY_KEY }}'
-        shell: bash
-
       - name: Subtree Pull
         shell: bash
         run: |
