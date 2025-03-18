@@ -11,6 +11,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Add deploykey
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan github.com >> ~/.ssh/known_hosts
@@ -20,6 +22,8 @@ jobs:
 
       - name: Subtree Pull
         shell: bash
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
           git subtree pull --prefix .github/workflows git@github.com:MSpreckelsQS/subtree-sub.git main --squash
 
