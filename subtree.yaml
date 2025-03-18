@@ -10,11 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Subtree Add
-        shell: bash
-        run: |
-          git subtree add --prefix .github/workflows https://github.com/MSpreckelsQS/subtree-sub.git main --squash
-
       - name: Subtree Pull
         shell: bash
         run: |
