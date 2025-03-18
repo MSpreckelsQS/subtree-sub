@@ -18,6 +18,7 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           eval `ssh-agent -s`
           ssh-add - <<< '${{ secrets.DEPLOY_KEY }}'
+          ssh -T git@github.com
         shell: bash
 
       - name: Subtree Pull
