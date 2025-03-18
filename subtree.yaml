@@ -10,23 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Add deploykey
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      - name: Extend Parent Repo URLs with access tokens
         run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          eval `ssh-agent -s`
-          ssh-add - <<< '${{ secrets.DEPLOY_KEY }}'
-          ssh -T -ai ./id_rsa_subtree_sub git@github.com
+          git config --global url."https://${{ secrets.TOKEN }}@github.com/MSpreckelsQS/".insteadOf "https://github.com/MSpreckelsQS/"
         shell: bash
 
       - name: Subtree Pull
         shell: bash
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          git subtree pull --prefix .github/workflows git@github.com:MSpreckelsQS/subtree-sub.git main --squash
+          git subtree pull --prefix .github/workflows https://github.com/MSpreckelsQS/subtree-sub.git main --squash
 
       - name: Create PR
         shell: bash
