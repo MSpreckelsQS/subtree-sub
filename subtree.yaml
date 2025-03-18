@@ -12,6 +12,8 @@ jobs:
 
       - name: Extend Parent Repo URLs with access tokens
         run: |
+          git config --global user.email "mail@example.com"
+          git config --global user.name "workflow"
           git config --global url."https://github:${{ secrets.TOKEN }}@github.com/MSpreckelsQS/".insteadOf "https://github.com/MSpreckelsQS/"
         shell: bash
 
